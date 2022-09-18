@@ -3,7 +3,8 @@ import requests
 from requests import Response
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
-from users.models import User, Address, Company, Localization
+from users.models import User
+from users.utils import create_models_from_json
 
 class Command(BaseCommand):
 
@@ -15,28 +16,7 @@ class Command(BaseCommand):
                 response: Response = requests.get(url=url, timeout=30)
 
                 for data in response.json():
-                    localization: Localization = Localization(**data["address"]["geo"])
-                    localization.save()
-                    del data["address"]["geo"]
-
-                    address: Address = Address.objects.create(
-                        **data["address"],
-                        localization=localization,
-                    )
-
-                    company: Company = Company.objects.create(
-                        catchphrase=data["company"]["catchPhrase"],
-                        name=data["company"]["name"],
-                        bs=data["company"]["bs"],
-                    )
-
-                    del data["address"]
-                    del data["company"]
-                    user: User = User.objects.create(
-                        **data,
-                        address=address,
-                        company=company,
-                    )
+                    user: User = create_models_from_json(data)
 
                     self.stdout.write(
                         self.style.SUCCESS('Successfully inserted user "%s"' % user.name),
