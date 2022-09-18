@@ -10,4 +10,5 @@ router_api.register(r'', UserSearchViewSet)
 
 urlpatterns = [
     path("users/", include(router_api.urls)),
+    path('auth/', include('rest_framework.urls'))
 ]

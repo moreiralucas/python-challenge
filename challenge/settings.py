@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-&7!26v-wwfylawu18c6p6ngw5&bp%8iha0sh*(vw9y_%%b3+$*"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 POSTGRES_DB = config('POSTGRES_DB', default='new_')
 POSTGRES_USER = config('POSTGRES_USER', default='invalid_user')
@@ -43,7 +43,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "users",
-    # "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -56,7 +55,6 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    # "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -94,9 +92,13 @@ DATABASES = {
         'PASSWORD': POSTGRES_PASSWORD,
         'HOST': POSTGRES_SERVICE,
         'PORT': POSTGRES_PORT,
+        'TEST': {
+            'NAME': 'unit_tests',
+        }
     }
 }
 
+AUTH_USER_MODEL = "users.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -118,11 +120,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
-        # 'rest_framework.renderers.JSONRenderer',
         'challenge.renderers.CustomRenderer'
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticated',
     ]
 }
 
