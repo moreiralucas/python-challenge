@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,17 +24,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-&7!26v-wwfylawu18c6p6ngw5&bp%8iha0sh*(vw9y_%%b3+$*"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config("DEBUG", default=False, cast=bool)
 
-POSTGRES_DB = config('POSTGRES_DB', default='new_')
-POSTGRES_USER = config('POSTGRES_USER', default='invalid_user')
-POSTGRES_PASSWORD = config('POSTGRES_PASSWORD', default='S0me-p455w0rd')
+POSTGRES_DB = config("POSTGRES_DB", default="new_")
+POSTGRES_USER = config("POSTGRES_USER", default="invalid_user")
+POSTGRES_PASSWORD = config("POSTGRES_PASSWORD", default="S0me-p455w0rd")
 
-POSTGRES_SERVICE = config('POSTGRES_SERVICE', default='db')
-POSTGRES_PORT = config('POSTGRES_PORT', default='5432')
-ENVIRONMENT = config('ENVIRONMENT', default='dev')
+POSTGRES_SERVICE = config("POSTGRES_SERVICE", default="db")
+POSTGRES_PORT = config("POSTGRES_PORT", default="5432")
+ENVIRONMENT = config("ENVIRONMENT", default="dev")
 
-ENGINE = 'django.db.backends.postgresql'
+ENGINE = "django.db.backends.postgresql"
 
 
 ALLOWED_HOSTS = []
@@ -49,7 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    'rest_framework.authtoken',
+    "rest_framework.authtoken",
 ]
 
 MIDDLEWARE = [
@@ -86,16 +87,16 @@ WSGI_APPLICATION = "challenge.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': ENGINE,
-        'NAME': POSTGRES_DB,
-        'USER': POSTGRES_USER,
-        'PASSWORD': POSTGRES_PASSWORD,
-        'HOST': POSTGRES_SERVICE,
-        'PORT': POSTGRES_PORT,
-        'TEST': {
-            'NAME': 'unit_tests',
-        }
+    "default": {
+        "ENGINE": ENGINE,
+        "NAME": POSTGRES_DB,
+        "USER": POSTGRES_USER,
+        "PASSWORD": POSTGRES_PASSWORD,
+        "HOST": POSTGRES_SERVICE,
+        "PORT": POSTGRES_PORT,
+        "TEST": {
+            "NAME": "unit_tests",
+        },
     }
 }
 
@@ -120,16 +121,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'challenge.renderers.CustomRenderer'
+    "DEFAULT_RENDERER_CLASSES": [
+        "challenge.renderers.CustomRenderer",
     ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
-    ]
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ],
 }
 
 

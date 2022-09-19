@@ -5,6 +5,8 @@ from rest_framework import serializers
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
+    """User Deatil Serializer"""
+
     company = serializers.SerializerMethodField()
 
     def get_company(self, obj):
@@ -14,11 +16,16 @@ class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         service_name = "users"
-        fields = ("name","email","company")
+        fields = ("name", "email", "company")
+
 
 class UserSearchSerializer(serializers.ModelSerializer):
+    """User Search Serializer"""
 
     class Meta:
         model = User
         service_name = "users"
-        fields = ("id", "name",)
+        fields = (
+            "id",
+            "name",
+        )

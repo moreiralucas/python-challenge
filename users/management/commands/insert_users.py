@@ -6,8 +6,8 @@ from django.db import transaction
 from users.models import User
 from users.utils import create_models_from_json, create_demo_user
 
-class Command(BaseCommand):
 
+class Command(BaseCommand):
     def handle(self, *args, **options):
         """Handle command"""
         url: str = "https://jsonplaceholder.typicode.com/users"
@@ -19,7 +19,9 @@ class Command(BaseCommand):
                     user: User = create_models_from_json(data)
 
                     self.stdout.write(
-                        self.style.SUCCESS('Successfully inserted user "%s"' % user.name),
+                        self.style.SUCCESS(
+                            'Successfully inserted user "%s"' % user.name
+                        ),
                     )
                     last_id = data["id"]
                 create_demo_user(id=last_id + 1)

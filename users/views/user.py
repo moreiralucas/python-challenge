@@ -9,22 +9,28 @@ from users.exceptions import RequiredParamNameError
 
 
 class UserDetailViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    """User Detail Viewset"""
+
     queryset = User.objects.order_by("name")
     serializer_class = UserDetailSerializer
 
 
 class UserSearchViewSet(viewsets.GenericViewSet):
+    """User Search Viewset"""
+
     queryset = User.objects.all()
     serializer_class = UserSearchSerializer
 
     def list(self, request, *args, **kwargs):
         queryset: QuerySet = User.objects.none()
-        name: Optional[str] = request.query_params.get('name')
+        name: Optional[str] = request.query_params.get("name")
 
         if name is None:
             raise RequiredParamNameError()
 
-        queryset = self.filter_queryset(self.get_queryset()).filter(name__icontains=name)
+        queryset = self.filter_queryset(self.get_queryset()).filter(
+            name__icontains=name
+        )
 
         serializer: UserSearchSerializer = self.get_serializer(queryset, many=True)
 

@@ -6,7 +6,7 @@ from users.models import User, Address, Company, Localization
 
 def create_models_from_json(data: Dict) -> User:
     """Create models of User, Address, Localization and Company from a json
-    Sample of json 
+    Sample of json
         {
             "id": 1,
             "name": "Leanne Graham",
@@ -31,7 +31,7 @@ def create_models_from_json(data: Dict) -> User:
             }
         }
     """
-    
+
     localization: Localization = Localization(**data["address"]["geo"])
     localization.save()
     del data["address"]["geo"]
@@ -57,16 +57,14 @@ def create_models_from_json(data: Dict) -> User:
 
     return user
 
+
 def create_demo_user(id: int) -> User:
     """Create a demo User
-        WARNING: Use this command only in development environment. 
-            Please, never use in production.
+    WARNING: Use this command only in development environment.
+        Please, never use in production.
     """
-    
-    location: Dict = {
-        "lat": "-71.4197",
-        "lng": "71.7478"
-    }
+
+    location: Dict = {"lat": "-71.4197", "lng": "71.7478"}
     address_data: Dict = {
         "street": "Norberto Crossing",
         "suite": "Apt. 950",
@@ -77,7 +75,7 @@ def create_demo_user(id: int) -> User:
     company: Dict = {
         "name": "Considine-Lockman",
         "catchPhrase": "Synchronised bottom-line interface",
-        "bs": "e-enable innovative applications"
+        "bs": "e-enable innovative applications",
     }
     user_data: Dict = {
         "id": id,

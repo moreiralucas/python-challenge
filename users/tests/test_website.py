@@ -11,7 +11,9 @@ class WebsiteTest(BaseTest):
         """Should test list websites"""
 
         url: str = "/users/websites/"
-        response = self.client_user.get(path=url, content_type="application/json", format="json")
+        response = self.client_user.get(
+            path=url, content_type="application/json", format="json"
+        )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         response_json: Dict = response.json()
