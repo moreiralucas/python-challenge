@@ -4,7 +4,7 @@ from requests import Response
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from users.models import User
-from users.utils import create_models_from_json
+from users.utils import create_models_from_json, create_demo_user
 
 class Command(BaseCommand):
 
@@ -21,6 +21,8 @@ class Command(BaseCommand):
                     self.stdout.write(
                         self.style.SUCCESS('Successfully inserted user "%s"' % user.name),
                     )
+                    last_id = data["id"]
+                create_demo_user(id=last_id + 1)
         except Exception as error:
             transaction.rollback()
             raise CommandError('Failed to insert users "%s"' % error)

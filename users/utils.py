@@ -56,3 +56,40 @@ def create_models_from_json(data: Dict) -> User:
     )
 
     return user
+
+def create_demo_user(id: int) -> User:
+    """Create a demo User
+        WARNING: Use this command only in development environment. 
+            Please, never use in production.
+    """
+    
+    location: Dict = {
+        "lat": "-71.4197",
+        "lng": "71.7478"
+    }
+    address_data: Dict = {
+        "street": "Norberto Crossing",
+        "suite": "Apt. 950",
+        "city": "South Christy",
+        "zipcode": "23505-1337",
+        "geo": location,
+    }
+    company: Dict = {
+        "name": "Considine-Lockman",
+        "catchPhrase": "Synchronised bottom-line interface",
+        "bs": "e-enable innovative applications"
+    }
+    user_data: Dict = {
+        "id": id,
+        "name": "Demo User",
+        "username": "demouser",
+        "email": "demo@example.com",
+        "address": address_data,
+        "phone": "1-770-736-8031 x56442",
+        "website": "https://example.com/",
+        "company": company,
+    }
+    demo_user: User = create_models_from_json(user_data)
+    demo_user.set_password("demo1234")
+    demo_user.save()
+    return demo_user
