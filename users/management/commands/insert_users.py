@@ -8,6 +8,8 @@ from users.utils import create_models_from_json, create_demo_user
 
 
 class Command(BaseCommand):
+    """Command to insert data in database from jsonplaceholder website"""
+
     def handle(self, *args, **options):
         """Handle command"""
         url: str = "https://jsonplaceholder.typicode.com/users"
@@ -27,4 +29,4 @@ class Command(BaseCommand):
                 create_demo_user(id=last_id + 1)
         except Exception as error:
             transaction.rollback()
-            raise CommandError('Failed to insert users "%s"' % error)
+            raise CommandError('Failed to insert users "%s"' % error) from error

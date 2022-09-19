@@ -1,11 +1,11 @@
 """User Serializer"""
 
-from users.models import User
 from rest_framework import serializers
+from users.models import User
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
-    """User Deatil Serializer"""
+    """User Detail Serializer"""
 
     company = serializers.SerializerMethodField()
 

@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   database:
+    container_name: database_challenge
     image: postgres:13.0-alpine
     env_file: 
       - ./.env
@@ -9,8 +10,9 @@ services:
       - ./DB:/var/lib/postgresql/data/
     restart: always
   web:
+    container_name: web_challenge
     build: .
-    # command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py migrate && python manage.py runserver 0.0.0.0:8000
     stdin_open: true
     tty: true
     volumes:

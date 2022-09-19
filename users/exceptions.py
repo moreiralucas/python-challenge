@@ -6,5 +6,6 @@ from rest_framework import status
 
 
 class RequiredParamNameError(APIException):
+    """Custom Required Param Exception"""
     status_code = status.HTTP_400_BAD_REQUEST
     default_detail = _("Required query param 'name'.")
