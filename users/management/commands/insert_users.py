@@ -26,7 +26,7 @@ class Command(BaseCommand):
                         ),
                     )
                     last_id = data["id"]
-                create_demo_user(id=last_id + 1)
+                create_demo_user(user_id=last_id + 1)
         except Exception as error:
             transaction.rollback()
             raise CommandError('Failed to insert users "%s"' % error) from error

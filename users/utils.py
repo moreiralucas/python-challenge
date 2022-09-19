@@ -58,7 +58,7 @@ def create_models_from_json(data: Dict) -> User:
     return user
 
 
-def create_demo_user(_id: int) -> User:
+def create_demo_user(user_id: int) -> User:
     """Create a demo User
     WARNING: Use this command only in development environment.
         Please, never use in production.
@@ -78,7 +78,7 @@ def create_demo_user(_id: int) -> User:
         "bs": "e-enable innovative applications",
     }
     user_data: Dict = {
-        "id": _id,
+        "id": user_id,
         "name": "Demo User",
         "username": "demouser",
         "email": "demo@example.com",
