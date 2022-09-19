@@ -16,14 +16,14 @@ docker-compose up -d
 
 The Django will be available in ```http://localhost:8000/```.
 
-Before handle any request, lets populate the database with a custom command.
+Before handle any request, lets populate the database with a custom command. Run this command in your terminal:
 
-Access the web_challenge container ```docker exec -it web_challenge bash```. Inside the web_challenge container, run ```python manage.py insert_users``` to get data from  https://jsonplaceholder.typicode.com/users website.
+```docker exec -it web_challenge python manage.py insert_users```. This will get data from  https://jsonplaceholder.typicode.com/users website and insert in database.
 
 
 Now, the database has data and the endpoints can response with something.
 
-The available endpoints is:
+The available endpoints are:
 ```
 POST /auth/
 GET /users/websites/
